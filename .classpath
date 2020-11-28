@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/Enigma 0.21 212 Decompiler/RubyDung/bin/jinput.jar"/>
+	<classpathentry kind="lib" path="D:/Enigma 0.21 212 Decompiler/RubyDung/bin/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Enigma 0.21 212 Decompiler/RubyDung/bin/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Enigma 0.21 212 Decompiler/RubyDung/bin/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="D:/Enigma 0.21 212 Decompiler/RubyDung/rd-161348-launcher.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
