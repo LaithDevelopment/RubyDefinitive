@@ -18,6 +18,8 @@ import org.lwjgl.BufferUtils;
 import java.nio.IntBuffer;
 import com.mojang.minecraft.character.Zombie;
 import com.mojang.minecraft.character.Human;
+import com.mojang.minecraft.character.Notch;
+
 import java.util.ArrayList;
 import com.mojang.minecraft.particle.ParticleEngine;
 import com.mojang.minecraft.level.LevelRenderer;
@@ -38,6 +40,7 @@ public class RubyDung implements Runnable {
     private ParticleEngine particleEngine;
     private ArrayList<Zombie> zombies;
     private ArrayList<Human> humans;
+    private ArrayList<Notch> notchs;
     private IntBuffer viewportBuffer;
     private IntBuffer selectBuffer;
     private HitResult hitResult;
@@ -50,6 +53,7 @@ public class RubyDung implements Runnable {
         this.paintTexture = 1;
         this.zombies = (ArrayList<Zombie>)new ArrayList();
         this.humans = (ArrayList<Human>)new ArrayList();
+        this.notchs = (ArrayList<Notch>)new ArrayList();
         this.viewportBuffer = BufferUtils.createIntBuffer(16);
         this.selectBuffer = BufferUtils.createIntBuffer(2000);
         this.hitResult = null;
@@ -89,10 +93,13 @@ public class RubyDung implements Runnable {
         this.player = new Player(this.level);
         this.particleEngine = new ParticleEngine(this.level);
         Mouse.setGrabbed(true);
+        //entity spawning
         for (int i = 0; i < 10; ++i) {
+        	//zombie entity
             final Zombie zombie = new Zombie(this.level, 128.0f, 0.0f, 128.0f);
             zombie.resetPos();
             this.zombies.add(zombie);
+            //human entity
             final Human human = new Human(this.level, 128.0f, 0.0f, 128.0f);
             human.resetPos();
             this.humans.add(human);
@@ -167,16 +174,25 @@ public class RubyDung implements Runnable {
         }
         this.level.tick();
         this.particleEngine.tick();
+        //zombie entity
         for (int i = 0; i < this.zombies.size(); ++i) {
             ((Zombie)this.zombies.get(i)).tick();
             if (((Zombie)this.zombies.get(i)).removed) {
                 this.zombies.remove(i--);
             }
         }
+        //human entity
         for (int i = 0; i < this.humans.size(); ++i) {
             ((Human)this.humans.get(i)).tick();
             if (((Human)this.humans.get(i)).removed) {
                 this.humans.remove(i--);
+            }
+        }
+        //notch entity
+        for (int i = 0; i < this.notchs.size(); ++i) {
+            ((Notch)this.notchs.get(i)).tick();
+            if (((Notch)this.notchs.get(i)).removed) {
+                this.notchs.remove(i--);
             }
         }
         this.player.tick();
@@ -299,30 +315,48 @@ public class RubyDung implements Runnable {
         this.setupFog(0);
         GL11.glEnable(2912);
         this.levelRenderer.render(this.player, 0);
+        //zombie entity
         for (int i = 0; i < this.zombies.size(); ++i) {
             final Zombie zombie = (Zombie)this.zombies.get(i);
             if (zombie.isLit() && frustum.isVisible(zombie.bb)) {
                 ((Zombie)this.zombies.get(i)).render(a);
             }
         }
+        //human entity
         for (int i = 0; i < this.humans.size(); ++i) {
             final Human human = (Human)this.humans.get(i);
             if (human.isLit() && frustum.isVisible(human.bb)) {
                 ((Human)this.humans.get(i)).render(a);
             }
         }
+        //notch entity
+        for (int i = 0; i < this.notchs.size(); ++i) {
+            final Notch notch = (Notch)this.notchs.get(i);
+            if (notch.isLit() && frustum.isVisible(notch.bb)) {
+                ((Notch)this.notchs.get(i)).render(a);
+            }
+        }
         this.particleEngine.render(this.player, a, 0);
         this.setupFog(1);
         this.levelRenderer.render(this.player, 1);
+        //zombie entity
         for (int i = 0; i < this.zombies.size(); ++i) {
             final Zombie zombie = (Zombie)this.zombies.get(i);
             if (!zombie.isLit() && frustum.isVisible(zombie.bb)) {
                 ((Zombie)this.zombies.get(i)).render(a);
             }
         }
+        //human entity
         for (int i = 0; i < this.humans.size(); ++i) {
             final Human human = (Human)this.humans.get(i);
             if (!human.isLit() && frustum.isVisible(human.bb)) {
+                ((Human)this.humans.get(i)).render(a);
+            }
+        }
+        //notch entity
+        for (int i = 0; i < this.notchs.size(); ++i) {
+            final Notch notch = (Notch)this.notchs.get(i);
+            if (!notch.isLit() && frustum.isVisible(notch.bb)) {
                 ((Human)this.humans.get(i)).render(a);
             }
         }
