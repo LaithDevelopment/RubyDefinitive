@@ -67,7 +67,7 @@ public class RubyDung implements Runnable {
         this.fogColor1.put(new float[] { (col2 >> 16 & 0xFF) / 255.0f, (col2 >> 8 & 0xFF) / 255.0f, (col2 & 0xFF) / 255.0f, 1.0f });
         this.fogColor1.flip();
         Display.setFullscreen(true);
-        Display.setTitle("RubyDung");
+        Display.setTitle("RubyDefinitive");
         Display.create();
         Keyboard.create();
         Mouse.create();
