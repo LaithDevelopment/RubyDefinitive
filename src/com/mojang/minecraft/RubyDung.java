@@ -25,7 +25,7 @@ import com.mojang.minecraft.level.Level;
 import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
-    private static final boolean FULLSCREEN_MODE = false;
+    private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -66,7 +66,7 @@ public class RubyDung implements Runnable {
         this.fogColor0.flip();
         this.fogColor1.put(new float[] { (col2 >> 16 & 0xFF) / 255.0f, (col2 >> 8 & 0xFF) / 255.0f, (col2 & 0xFF) / 255.0f, 1.0f });
         this.fogColor1.flip();
-        Display.setDisplayMode(new DisplayMode(1024, 768));
+        Display.setFullscreen(true);
         Display.setTitle("RubyDung");
         Display.create();
         Keyboard.create();
