@@ -88,13 +88,13 @@ public class RubyDung implements Runnable {
         GL11.glMatrixMode(5889);
         GL11.glLoadIdentity();
         GL11.glMatrixMode(5888);
-        this.level = new Level(256, 256, 64);
+        this.level = new Level(512, 512, 64); //map size
         this.levelRenderer = new LevelRenderer(this.level);
         this.player = new Player(this.level);
         this.particleEngine = new ParticleEngine(this.level);
         Mouse.setGrabbed(true);
         //entity spawning
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 40; ++i) {
         	//zombie entity
             final Zombie zombie = new Zombie(this.level, 128.0f, 0.0f, 128.0f);
             zombie.resetPos();
@@ -376,7 +376,7 @@ public class RubyDung implements Runnable {
     private void drawGui(final float a) {
         final int screenWidth = this.width * 240 / this.height;
         final int screenHeight = this.height * 240 / this.height;
-        GL11.glClear(256);
+        GL11.glClear(512); //map size
         GL11.glMatrixMode(5889);
         GL11.glLoadIdentity();
         GL11.glOrtho(0.0, (double)screenWidth, (double)screenHeight, 0.0, 100.0, 300.0);

@@ -56,7 +56,7 @@ public class PerlinNoiseFilter {
         final int[] result = new int[width * height];
         for (int y = 0; y < height; ++y) {
             for (int x = 0; x < width; ++x) {
-                result[x + y * width] = tmp[x % width + y % height * width] / 512 + 128;
+                result[x + y * width] = tmp[x % width + y % height * width] / 1024 + 128;
             }
         }
         return result;
