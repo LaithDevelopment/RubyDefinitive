@@ -30,7 +30,7 @@ import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "0.0.11a";
-    private static final boolean FULLSCREEN_MODE = true;
+    private static final boolean FULLSCREEN_MODE = false;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -77,7 +77,7 @@ public class RubyDung implements Runnable {
         this.fogColor0.flip();
         this.fogColor1.put(new float[] { (col2 >> 16 & 0xFF) / 255.0f, (col2 >> 8 & 0xFF) / 255.0f, (col2 & 0xFF) / 255.0f, 1.0f });
         this.fogColor1.flip();
-        Display.setFullscreen(true);
+        Display.setDisplayMode(new DisplayMode(1024, 768));
         Display.setTitle("RubyDefinitive");
         Display.create();
         Keyboard.create();
@@ -95,7 +95,7 @@ public class RubyDung implements Runnable {
         GL11.glMatrixMode(5889);
         GL11.glLoadIdentity();
         GL11.glMatrixMode(5888);
-        this.level = new Level(512, 512, 64); //map size
+        this.level = new Level(256, 256, 64); //map size
         this.levelRenderer = new LevelRenderer(this.level);
         this.player = new Player(this.level);
         this.particleEngine = new ParticleEngine(this.level);
