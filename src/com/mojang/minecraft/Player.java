@@ -16,6 +16,9 @@ public class Player extends Entity {
         this.zo = this.z;
         float xa = 0.0f;
         float ya = 0.0f;
+        if (this.y < -1.0F) {
+            this.resetPos();
+        }
         if (Keyboard.isKeyDown(19)) {
             this.resetPos();
         }
