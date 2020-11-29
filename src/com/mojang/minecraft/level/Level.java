@@ -85,6 +85,46 @@ public class Level {
                 }
             }
         }
+        //0.0.11a cave generation
+        for (int count = w * h * d / 256 / 64, j = 0; j < count; ++j) {
+            float x2 = this.random.nextFloat() * w;
+            float y2 = this.random.nextFloat() * d;
+            float z2 = this.random.nextFloat() * h;
+            final int length = (int)(this.random.nextFloat() + this.random.nextFloat() * 150.0f);
+            float dir1 = (float)(this.random.nextFloat() * 3.141592653589793 * 2.0);
+            float dira1 = 0.0f;
+            float dir2 = (float)(this.random.nextFloat() * 3.141592653589793 * 2.0);
+            float dira2 = 0.0f;
+            for (int l = 0; l < length; ++l) {
+                x2 += (float)(Math.sin((double)dir1) * Math.cos((double)dir2));
+                z2 += (float)(Math.cos((double)dir1) * Math.cos((double)dir2));
+                y2 += (float)Math.sin((double)dir2);
+                dir1 += dira1 * 0.2f;
+                dira1 *= 0.9f;
+                dira1 += this.random.nextFloat() - this.random.nextFloat();
+                dir2 += dira2 * 0.5f;
+                dir2 *= 0.5f;
+                dira2 *= 0.9f;
+                dira2 += this.random.nextFloat() - this.random.nextFloat();
+                final float size = (float)(Math.sin(l * 3.141592653589793 / length) * 2.5 + 1.0);
+                for (int xx = (int)(x2 - size); xx <= (int)(x2 + size); ++xx) {
+                    for (int yy = (int)(y2 - size); yy <= (int)(y2 + size); ++yy) {
+                        for (int zz = (int)(z2 - size); zz <= (int)(z2 + size); ++zz) {
+                            final float xd = xx - x2;
+                            final float yd = yy - y2;
+                            final float zd = zz - z2;
+                            final float dd = xd * xd + yd * yd * 2.0f + zd * zd;
+                            if (dd < size * size && xx >= 1 && yy >= 1 && zz >= 1 && xx < this.width - 1 && yy < this.depth - 1 && zz < this.height - 1) {
+                                final int ii = (yy * this.height + zz) * this.width + xx;
+                                if (blocks[ii] == Tile.stoneBrick.id) {
+                                    blocks[ii] = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public boolean load() {

@@ -29,7 +29,8 @@ import com.mojang.minecraft.level.Level;
 import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
-    public static final String VERSION_STRING = "0.0.11a";
+    public static final String VERSION_STRING = "0.0.2a";
+    public static final String BUILD_STRING = "DEV build 2";
     private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;
@@ -64,7 +65,7 @@ public class RubyDung implements Runnable {
         this.selectBuffer = BufferUtils.createIntBuffer(2000);
         this.hitResult = null;
         this.lb = BufferUtils.createFloatBuffer(16);
-        this.fpsString="";
+        this.fpsString = "";
     }
     
     public void init() throws LWJGLException, IOException {
@@ -425,9 +426,10 @@ public class RubyDung implements Runnable {
         GL11.glDisable(3553);
         GL11.glPopMatrix();
         this.checkGlError("GUI: Draw selected");
-        this.font.drawShadow("0.0.1a DEV", 2, 2, 16777215);
+        this.font.drawShadow(VERSION_STRING, 2, 2, 16777215);
         this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
         this.font.drawShadow("Selected Block: "+this.paintTexture, 2, 22, 16777215);
+        this.font.drawShadow(BUILD_STRING, 2, 42, 16777215);
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
