@@ -17,5 +17,5 @@ Click that, and open up the RubyDefinitive file.
 You can also run the mod without MultiMC using this method:
 
 Put all of the required dependencies in the same folder as RubyDefinitive (this includes lwjgl.jar, lwjgl_util.jar, jinput.jar and all of the dlls (natives))
-the open console in the directory and execute this command: "java.exe -cp lwjgl.jar;lwjgl_util.jar;jinput.jar;RubyDefinitive.jar com.mojang.minecraft.RubyDung"
-or create a .bat file containing the same command in the main directory
+Next, open command prompt in the directory and execute this command: "java.exe -cp lwjgl.jar;lwjgl_util.jar;jinput.jar;RubyDefinitive.jar com.mojang.minecraft.RubyDung"
+or you can create a .bat file containing the same command in the main directory
