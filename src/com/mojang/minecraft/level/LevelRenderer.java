@@ -135,7 +135,7 @@ public class LevelRenderer implements LevelListener {
         GL11.glBlendFunc(770, 1);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, ((float)Math.sin(System.currentTimeMillis() / 100.0) * 0.2f + 0.4f) * 0.5f);
         t.init();
-        Tile.stoneBrick.renderFaceNoTexture(t, h.x, h.y, h.z, h.f);
+        Tile.rock.renderFaceNoTexture(t, h.x, h.y, h.z, h.f);
         t.flush();
         GL11.glDisable(3042);
     }
