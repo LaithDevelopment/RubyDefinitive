@@ -29,8 +29,9 @@ import com.mojang.minecraft.level.Level;
 import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
-    public static final String VERSION_STRING = "0.0.2a";
-    public static final String BUILD_STRING = "DEV build 2";
+    public static final String VERSION_STRING = "rd-0.0.2";
+    public static final String BUILD_STRING = "db3";
+    public static final Boolean FlatWorld = false;
     private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;
@@ -78,7 +79,11 @@ public class RubyDung implements Runnable {
         this.fogColor0.flip();
         this.fogColor1.put(new float[] { (col2 >> 16 & 0xFF) / 255.0f, (col2 >> 8 & 0xFF) / 255.0f, (col2 & 0xFF) / 255.0f, 1.0f });
         this.fogColor1.flip();
-        Display.setFullscreen(true);
+        if(FULLSCREEN_MODE == true) {
+            Display.setFullscreen(true);
+        }else {
+            Display.setDisplayMode(new DisplayMode(853, 480));
+        }
         Display.setTitle("RubyDefinitive");
         Display.create();
         Keyboard.create();
@@ -402,7 +407,7 @@ public class RubyDung implements Runnable {
     private void drawGui(final float a) {
         final int screenWidth = this.width * 240 / this.height;
         final int screenHeight = this.height * 240 / this.height;
-        GL11.glClear(512); //map size
+        GL11.glClear(256); //map size
         GL11.glMatrixMode(5889);
         GL11.glLoadIdentity();
         GL11.glOrtho(0.0, (double)screenWidth, (double)screenHeight, 0.0, 100.0, 300.0);
@@ -426,10 +431,9 @@ public class RubyDung implements Runnable {
         GL11.glDisable(3553);
         GL11.glPopMatrix();
         this.checkGlError("GUI: Draw selected");
-        this.font.drawShadow(VERSION_STRING, 2, 2, 16777215);
+        this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
         this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
-        this.font.drawShadow("Selected Block: "+this.paintTexture, 2, 22, 16777215);
-        this.font.drawShadow(BUILD_STRING, 2, 42, 16777215);
+        this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
