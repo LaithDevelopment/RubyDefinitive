@@ -75,10 +75,10 @@ public class Level {
                     final int i = (y * this.height + z) * this.width + x;
                     int id = 0;
                     if(RubyDung.FlatWorld == true) {
-                        if (y == 48) {
+                        if (y == 32) {
                             id = Tile.grass.id;
                         }
-                        if (y < 48) {
+                        if (y < 32) {
                             id = Tile.rock.id;
                         }
                         this.blocks[i] = (byte)id;
