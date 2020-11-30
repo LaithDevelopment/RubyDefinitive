@@ -11,15 +11,15 @@ public class Tile {
     public static final Tile[] tiles;
     public static final Tile empty;
     public static final Tile grass;
-    public static final Tile stoneBrick;
+    public static final Tile rock;
     public int tex;
     public final int id;
     
     static {
         tiles = new Tile[256];
         empty = null;
-        stoneBrick = new Tile(1, 1);
-        grass = new GrassTile(2);
+        rock = new Tile(2, 1);
+        grass = new Tile(1, 0);
     }
     
     protected Tile(final int id) {
