@@ -108,15 +108,17 @@ public class RubyDung implements Runnable {
         this.font = new Font("/default.gif", this.textures);
         Mouse.setGrabbed(true);
         //entity spawning
-        for (int i = 0; i < 40; ++i) {
-        	//zombie entity
-            final Zombie zombie = new Zombie(this.level, 128.0f, 0.0f, 128.0f);
-            zombie.resetPos();
-            this.zombies.add(zombie);
-            //human entity
-            final Human human = new Human(this.level, 128.0f, 0.0f, 128.0f);
-            human.resetPos();
-            this.humans.add(human);
+        if(this.FlatWorld == false) {
+            for (int i = 0; i < 40; ++i) {
+            	//zombie entity
+                final Zombie zombie = new Zombie(this.level, 128.0f, 0.0f, 128.0f);
+                zombie.resetPos();
+                this.zombies.add(zombie);
+                //human entity
+                final Human human = new Human(this.level, 128.0f, 0.0f, 128.0f);
+                human.resetPos();
+                this.humans.add(human);
+            }
         }
     }
     
