@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 import java.io.FileInputStream;
 import java.io.File;
+
+import com.mojang.minecraft.RubyDung;
 import com.mojang.minecraft.level.tile.Tile;
 import java.util.Random;
 import java.util.ArrayList;
@@ -72,6 +74,15 @@ public class Level {
                     }
                     final int i = (y * this.height + z) * this.width + x;
                     int id = 0;
+                    if(RubyDung.FlatWorld == true) {
+                        if (y == 32) {
+                            id = Tile.grass.id;
+                        }
+                        if (y < 32) {
+                            id = Tile.stoneBrick.id;
+                        }
+                        this.blocks[i] = (byte)id;
+                    }else {
                     if (y == dh3) {
                         id = Tile.grass.id;
                     }
@@ -82,6 +93,7 @@ public class Level {
                         id = Tile.stoneBrick.id;
                     }
                     this.blocks[i] = (byte)id;
+                    }
                 }
             }
         }
