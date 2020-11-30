@@ -32,7 +32,7 @@ public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
     public static final String BUILD_STRING = "db3";
     public static final Boolean FlatWorld = false;
-    public static final Boolean CavesEnabled = true;
+    public static final Boolean CavesEnabled = false;
     private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;
@@ -439,6 +439,8 @@ public class RubyDung implements Runnable {
         this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         String flatWorldStr = String.valueOf(FlatWorld); 
         this.font.drawShadow("Flat world: "+flatWorldStr, 2, 32, 16777215);
+        String cavesEnabledStr = String.valueOf(CavesEnabled); 
+        this.font.drawShadow("Caves enabled: "+cavesEnabledStr, 2, 42, 16777215);
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
