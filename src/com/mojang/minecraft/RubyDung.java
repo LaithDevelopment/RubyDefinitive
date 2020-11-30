@@ -32,6 +32,7 @@ public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
     public static final String BUILD_STRING = "db3";
     public static final Boolean FlatWorld = false;
+    public static final Boolean CavesEnabled = true;
     private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;

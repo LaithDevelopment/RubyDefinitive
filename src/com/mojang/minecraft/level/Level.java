@@ -99,9 +99,9 @@ public class Level {
         }
         //0.0.11a cave generation
         int var1 = 0;
-        if(RubyDung.FlatWorld == true) {
+        if(RubyDung.CavesEnabled == false) {
         	var1 = -1;
-        }else {
+    	}else {
         	var1 = 64;
         }
         for (int count = w * h * d / 256 / var1, j = 0; j < count; ++j) {
