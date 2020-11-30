@@ -75,11 +75,11 @@ public class Level {
                     final int i = (y * this.height + z) * this.width + x;
                     int id = 0;
                     if(RubyDung.FlatWorld == true) {
-                        if (y == 32) {
+                        if (y == 48) {
                             id = Tile.grass.id;
                         }
-                        if (y < 32) {
-                            id = Tile.stoneBrick.id;
+                        if (y < 48) {
+                            id = Tile.rock.id;
                         }
                         this.blocks[i] = (byte)id;
                     }else {
@@ -87,10 +87,10 @@ public class Level {
                         id = Tile.grass.id;
                     }
                     if (y < dh3) {
-                        id = Tile.stoneBrick.id;
+                        id = Tile.rock.id;
                     }
                     if (y <= rh) {
-                        id = Tile.stoneBrick.id;
+                        id = Tile.rock.id;
                     }
                     this.blocks[i] = (byte)id;
                     }
@@ -98,7 +98,13 @@ public class Level {
             }
         }
         //0.0.11a cave generation
-        for (int count = w * h * d / 256 / 64, j = 0; j < count; ++j) {
+        int var1 = 0;
+        if(RubyDung.FlatWorld == true) {
+        	var1 = -1;
+        }else {
+        	var1 = 64;
+        }
+        for (int count = w * h * d / 256 / var1, j = 0; j < count; ++j) {
             float x2 = this.random.nextFloat() * w;
             float y2 = this.random.nextFloat() * d;
             float z2 = this.random.nextFloat() * h;
@@ -128,7 +134,11 @@ public class Level {
                             final float dd = xd * xd + yd * yd * 2.0f + zd * zd;
                             if (dd < size * size && xx >= 1 && yy >= 1 && zz >= 1 && xx < this.width - 1 && yy < this.depth - 1 && zz < this.height - 1) {
                                 final int ii = (yy * this.height + zz) * this.width + xx;
-                                if (blocks[ii] == Tile.stoneBrick.id) {
+                                if(RubyDung.FlatWorld == true) {
+                                	if (blocks[ii] == Tile.rock.id || blocks[ii] == Tile.grass.id) {
+                                        blocks[ii] = 0;
+                                	}
+                                }else if (blocks[ii] == Tile.rock.id) {
                                     blocks[ii] = 0;
                                 }
                             }
