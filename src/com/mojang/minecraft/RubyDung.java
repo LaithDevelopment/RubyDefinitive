@@ -33,7 +33,7 @@ public class RubyDung implements Runnable {
     public static final String BUILD_STRING = "db4";
     public static final Boolean OLDWORLD_ENABLED = true;
     public static final Boolean CAVES_ENABLED = true;
-    private static final boolean FULLSCREEN_MODE = true;
+    private static final boolean FULLSCREEN_MODE = false;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -435,20 +435,22 @@ public class RubyDung implements Runnable {
         GL11.glScalef(-1.0f, -1.0f, 1.0f);
         final int id = Textures.loadTexture("/terrain.png", 9728);
         GL11.glBindTexture(3553, id);
-        GL11.glEnable(3553);
-        t.init();
-        Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
-        t.flush();
-        GL11.glDisable(3553);
+        if(OLDWORLD_ENABLED == true) {
+        }else {
+            GL11.glEnable(3553);
+            t.init();
+            Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
+            t.flush();
+            GL11.glDisable(3553);
+        }
         GL11.glPopMatrix();
         this.checkGlError("GUI: Draw selected");
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
         this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
-        if(OLDWORLD_ENABLED == false) {
-            this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
-        }
         if(OLDWORLD_ENABLED == true) {
             this.font.drawShadow("rd-132211 recreation", 2, 22, 16777215);
+        }else {
+        this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         }
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
