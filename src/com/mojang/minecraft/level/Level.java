@@ -74,7 +74,7 @@ public class Level {
                     }
                     final int i = (y * this.height + z) * this.width + x;
                     int id = 0;
-                    if(RubyDung.FlatWorld == true) {
+                    if(RubyDung.OLDWORLD_ENABLED == true) {
                         if (y == 32) {
                             id = Tile.grass.id;
                         }
@@ -99,7 +99,9 @@ public class Level {
         }
         //0.0.11a cave generation
         int var1 = 0;
-        if(RubyDung.CavesEnabled == false) {
+        if(RubyDung.CAVES_ENABLED == false) {
+        	var1 = -1;
+    	}else if(RubyDung.OLDWORLD_ENABLED == true) {
         	var1 = -1;
     	}else {
         	var1 = 64;
@@ -134,7 +136,7 @@ public class Level {
                             final float dd = xd * xd + yd * yd * 2.0f + zd * zd;
                             if (dd < size * size && xx >= 1 && yy >= 1 && zz >= 1 && xx < this.width - 1 && yy < this.depth - 1 && zz < this.height - 1) {
                                 final int ii = (yy * this.height + zz) * this.width + xx;
-                                if(RubyDung.FlatWorld == true) {
+                                if(RubyDung.OLDWORLD_ENABLED == true) {
                                 	if (blocks[ii] == Tile.rock.id || blocks[ii] == Tile.grass.id) {
                                         blocks[ii] = 0;
                                 	}
@@ -151,14 +153,27 @@ public class Level {
     
     public boolean load() {
         try {
+        	if(RubyDung.OLDWORLD_ENABLED == true) {
+                final DataInputStream dis = new DataInputStream((InputStream)new GZIPInputStream((InputStream)new FileInputStream(new File("level-old.dat"))));
+                dis.readFully(this.blocks);
+                this.calcLightDepths(0, 0, this.width, this.height);
+                for (int i = 0; i < this.levelListeners.size(); ++i) {
+                    ((LevelListener)this.levelListeners.get(i)).allChanged();
+                    
+                }
+                dis.close();
+                return true;
+        	}else {
             final DataInputStream dis = new DataInputStream((InputStream)new GZIPInputStream((InputStream)new FileInputStream(new File("level.dat"))));
             dis.readFully(this.blocks);
             this.calcLightDepths(0, 0, this.width, this.height);
             for (int i = 0; i < this.levelListeners.size(); ++i) {
                 ((LevelListener)this.levelListeners.get(i)).allChanged();
+                
             }
             dis.close();
             return true;
+        }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -168,9 +183,15 @@ public class Level {
     
     public void save() {
         try {
+        	if(RubyDung.OLDWORLD_ENABLED == true) {
+                final DataOutputStream dos = new DataOutputStream((OutputStream)new GZIPOutputStream((OutputStream)new FileOutputStream(new File("level-old.dat"))));
+                dos.write(this.blocks);
+                dos.close();
+        	}else {
             final DataOutputStream dos = new DataOutputStream((OutputStream)new GZIPOutputStream((OutputStream)new FileOutputStream(new File("level.dat"))));
             dos.write(this.blocks);
             dos.close();
+        	}
         }
         catch (Exception e) {
             e.printStackTrace();
