@@ -4,6 +4,7 @@ import com.mojang.minecraft.particle.Particle;
 import com.mojang.minecraft.particle.ParticleEngine;
 import java.util.Random;
 import com.mojang.minecraft.phys.AABB;
+import com.mojang.minecraft.RubyDung;
 import com.mojang.minecraft.level.Level;
 import com.mojang.minecraft.level.Tesselator;
 
@@ -191,7 +192,10 @@ public class Tile {
                     final float xp = x + (xx + 0.5f) / SD;
                     final float yp = y + (yy + 0.5f) / SD;
                     final float zp = z + (zz + 0.5f) / SD;
-                    particleEngine.add(new Particle(level, xp, yp, zp, xp - x - 0.5f, yp - y - 0.5f, zp - z - 0.5f, this.tex));
+                    if(RubyDung.OLDWORLD_ENABLED == false) {
+                        particleEngine.add(new Particle(level, xp, yp, zp, xp - x - 0.5f, yp - y - 0.5f, zp - z - 0.5f, this.tex));
+                    }else {
+                    }
                 }
             }
         }
