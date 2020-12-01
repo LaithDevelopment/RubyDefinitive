@@ -33,7 +33,7 @@ public class RubyDung implements Runnable {
     public static final String BUILD_STRING = "db4";
     public static final Boolean OLDWORLD_ENABLED = false;
     public static final Boolean CAVES_ENABLED = true;
-    private static final boolean FULLSCREEN_MODE = false;
+    private static final boolean FULLSCREEN_MODE = true;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -335,7 +335,15 @@ public class RubyDung implements Runnable {
                 if (this.hitResult.f == 5) {
                     ++x;
                 }
-                this.level.setTile(x, y, z, this.paintTexture);
+                if(OLDWORLD_ENABLED == true && y == 32) {
+                    this.level.setTile(x, y, z, 1);
+                }
+                else if(OLDWORLD_ENABLED == true) {
+                this.level.setTile(x, y, z, 2);
+                }
+                else {
+                    this.level.setTile(x, y, z, this.paintTexture);
+                }
             }
         }
         GL11.glClear(16640);
