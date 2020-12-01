@@ -447,8 +447,6 @@ public class RubyDung implements Runnable {
         this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         String flatWorldStr = String.valueOf(OLDWORLD_ENABLED); 
         this.font.drawShadow("Old world: "+flatWorldStr, 2, 32, 16777215);
-        String cavesEnabledStr = String.valueOf(CAVES_ENABLED); 
-        this.font.drawShadow("Caves enabled: "+cavesEnabledStr, 2, 42, 16777215);
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
