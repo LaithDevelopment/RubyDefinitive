@@ -194,7 +194,6 @@ public class Tile {
                     final float zp = z + (zz + 0.5f) / SD;
                     if(RubyDung.OLDWORLD_ENABLED == false) {
                         particleEngine.add(new Particle(level, xp, yp, zp, xp - x - 0.5f, yp - y - 0.5f, zp - z - 0.5f, this.tex));
-                    }else {
                     }
                 }
             }
