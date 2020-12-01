@@ -30,10 +30,10 @@ import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
-    public static final String BUILD_STRING = "db3";
-    public static final Boolean FlatWorld = false;
-    public static final Boolean CavesEnabled = false;
-    private static final boolean FULLSCREEN_MODE = true;
+    public static final String BUILD_STRING = "db4";
+    public static final Boolean OLDWORLD_ENABLED = false;
+    public static final Boolean CAVES_ENABLED = true;
+    private static final boolean FULLSCREEN_MODE = false;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -109,7 +109,7 @@ public class RubyDung implements Runnable {
         this.font = new Font("/default.gif", this.textures);
         Mouse.setGrabbed(true);
         //entity spawning
-        if(this.FlatWorld == false) {
+        if(this.OLDWORLD_ENABLED == false) {
             for (int i = 0; i < 40; ++i) {
             	//zombie entity
                 final Zombie zombie = new Zombie(this.level, 128.0f, 0.0f, 128.0f);
@@ -437,9 +437,9 @@ public class RubyDung implements Runnable {
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
         this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
         this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
-        String flatWorldStr = String.valueOf(FlatWorld); 
-        this.font.drawShadow("Flat world: "+flatWorldStr, 2, 32, 16777215);
-        String cavesEnabledStr = String.valueOf(CavesEnabled); 
+        String flatWorldStr = String.valueOf(OLDWORLD_ENABLED); 
+        this.font.drawShadow("Old world: "+flatWorldStr, 2, 32, 16777215);
+        String cavesEnabledStr = String.valueOf(CAVES_ENABLED); 
         this.font.drawShadow("Caves enabled: "+cavesEnabledStr, 2, 42, 16777215);
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
