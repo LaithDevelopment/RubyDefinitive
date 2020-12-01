@@ -31,7 +31,7 @@ import java.nio.FloatBuffer;
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
     public static final String BUILD_STRING = "db4";
-    public static final Boolean OLDWORLD_ENABLED = false;
+    public static final Boolean OLDWORLD_ENABLED = true;
     public static final Boolean CAVES_ENABLED = true;
     private static final boolean FULLSCREEN_MODE = true;
     private int width;
@@ -444,9 +444,12 @@ public class RubyDung implements Runnable {
         this.checkGlError("GUI: Draw selected");
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
         this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
-        this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
-        String oldWorldStr = String.valueOf(OLDWORLD_ENABLED); 
-        this.font.drawShadow("Old world: "+oldWorldStr, 2, 32, 16777215);
+        if(OLDWORLD_ENABLED == false) {
+            this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
+        }
+        if(OLDWORLD_ENABLED == true) {
+            this.font.drawShadow("rd-132211 recreation", 2, 22, 16777215);
+        }
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
