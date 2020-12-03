@@ -31,7 +31,7 @@ import java.nio.FloatBuffer;
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
     public static final String BUILD_STRING = "db4";
-    public static final Boolean OLDWORLD_ENABLED = true;
+    public static final Boolean OLDWORLD_ENABLED = false;
     public static final Boolean CAVES_ENABLED = true;
     private static final boolean FULLSCREEN_MODE = false;
     private int width;
@@ -194,6 +194,9 @@ public class RubyDung implements Runnable {
                 }
                 if (Keyboard.getEventKey() == 3) {
                     this.paintTexture = 2;
+                }
+                if (Keyboard.getEventKey() == 4) {
+                    this.paintTexture = 3;
                 }
                 if (Keyboard.getEventKey() == 34) {
                     this.humans.add(new Human(this.level, this.player.x, this.player.y, this.player.z));

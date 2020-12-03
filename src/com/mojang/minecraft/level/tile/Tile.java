@@ -13,6 +13,7 @@ public class Tile {
     public static final Tile empty;
     public static final Tile grass;
     public static final Tile rock;
+    public static final Tile water;
     public int tex;
     public final int id;
     
@@ -21,6 +22,7 @@ public class Tile {
         empty = null;
         rock = new Tile(2, 1);
         grass = new Tile(1, 0);
+        water = new WaterTile(3);
     }
     
     protected Tile(final int id) {
