@@ -14,6 +14,9 @@ public class Tile {
     public static final Tile grass;
     public static final Tile rock;
     public static final Tile water;
+    public static final Tile calmWater;
+    public static final Tile lava;
+    public static final Tile calmLava;
     public int tex;
     public final int id;
     
@@ -22,15 +25,18 @@ public class Tile {
         empty = null;
         rock = new Tile(2, 1);
         grass = new Tile(1, 0);
-        water = new WaterTile(3);
+        water = new LiquidTile(3, 2);
+        calmWater = new CalmLiquidTile(4, 2);
+        lava = new LiquidTile(5, 3);
+        calmLava = new CalmLiquidTile(6, 3);
     }
     
     protected Tile(final int id) {
         Tile.tiles[id] = this;
         this.id = id;
     }
-    
-    protected Tile(final int id, final int tex) {
+
+	protected Tile(final int id, final int tex) {
         this(id);
         this.tex = tex;
     }

@@ -198,6 +198,15 @@ public class RubyDung implements Runnable {
                 if (Keyboard.getEventKey() == 4) {
                     this.paintTexture = 3;
                 }
+                if (Keyboard.getEventKey() == 5) {
+                    this.paintTexture = 4;
+                }
+                if (Keyboard.getEventKey() == 6) {
+                    this.paintTexture = 5;
+                }
+                if (Keyboard.getEventKey() == 7) {
+                    this.paintTexture = 6;
+                }
                 if (Keyboard.getEventKey() == 34) {
                     this.humans.add(new Human(this.level, this.player.x, this.player.y, this.player.z));
                 }
