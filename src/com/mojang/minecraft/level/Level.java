@@ -74,7 +74,7 @@ public class Level {
                     }
                     final int i = (y * this.height + z) * this.width + x;
                     int id = 0;
-                    if(RubyDung.OLDWORLD_ENABLED == true) {
+                    if(RubyDung.OLDWORLD_ENABLED == true || RubyDung.FLAT_TERRAIN == true) {
                         if (y == 32) {
                             id = Tile.grass.id;
                         }

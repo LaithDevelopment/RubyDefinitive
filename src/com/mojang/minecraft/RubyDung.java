@@ -33,6 +33,7 @@ public class RubyDung implements Runnable {
     public static final String BUILD_STRING = "db4";
     public static final Boolean OLDWORLD_ENABLED = false;
     public static final Boolean CAVES_ENABLED = true;
+    public static final Boolean FLAT_TERRAIN = false;
     private static final boolean FULLSCREEN_MODE = false;
     private int width;
     private int height;
