@@ -49,13 +49,13 @@ public class LiquidTile extends Tile {
                 level.setTile(x-1, y, z, 2);
             }
             if (level.getTile(x + 1, y, z) == 5) {
-                level.setTile(x+1, y, z, 2);
+                level.setTile(x + 1, y, z, 2);
             }
             if (level.getTile(x, y, z - 1) == 5) {
                 level.setTile(x, y, z-1, 2);
             }
             if (level.getTile(x, y, z + 1) == 5) {
-                level.setTile(x, y, z+1, 2);
+                level.setTile(x, y, z + 1, 2);
             }
         }
     }
@@ -70,7 +70,7 @@ public class LiquidTile extends Tile {
             t.color(c1, c1, c1);
             this.renderFace(t, x, y, z, 0);
         }
-        if (level.getTile(x, y + 1, z) == 0 && level.isLit(x, y, z) ^ layer == 1 || level.getTile(x, y + 1, z) == 4 && level.isLit(x, y, z) ^ layer == 1 || level.getTile(x, y + 1, z) == 6 && level.isLit(x, y, z) ^ layer == 1 ) {
+        if (level.getTile(x, y + 1, z) == 0 && level.isLit(x, y, z) ^ layer == 1) {
             t.color(c1, c1, c1);
             this.renderFace(t, x, y, z, 1);
         }

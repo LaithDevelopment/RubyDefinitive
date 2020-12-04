@@ -30,7 +30,7 @@ public class CalmLiquidTile extends LiquidTile {
         if (level.getTile(x, y - 1, z) == 0) {
             level.setTile(x, y - 1, z, this.tileId);
         }
-        if (level.getTile(x, y + 1, z) != 0) {
+        if (level.getTile(x, y + 1, z) == this.tileId || level.getTile(x, y + 1, z) == this.calmTileId) {
             level.setTile(x, y, z, this.tileId);
         }
         //if waterTile or calmWaterTile is below lavaTile, turn into lavaTile
