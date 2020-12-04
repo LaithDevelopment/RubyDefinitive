@@ -30,11 +30,13 @@ import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
-    public static final String BUILD_STRING = "db4";
+    public static final String BUILD_STRING = "db5 - Liquid_Test_Optimised";
+    //game options
     public static final Boolean OLDWORLD_ENABLED = false;
     public static final Boolean CAVES_ENABLED = true;
     public static final Boolean FLAT_TERRAIN = false;
-    private static final boolean FULLSCREEN_MODE = false;
+    private static final Boolean COORDINATES_ENABLED = false;
+    private static final Boolean FULLSCREEN_MODE = false;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -458,6 +460,11 @@ public class RubyDung implements Runnable {
             this.font.drawShadow("rd-132211 recreation", 2, 22, 16777215);
         }else {
         this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
+        }
+        if (COORDINATES_ENABLED == true) {
+            this.font.drawShadow("x: "+this.player.x, 2, 42, 16777215);
+            this.font.drawShadow("y: "+this.player.y, 2, 52, 16777215);
+            this.font.drawShadow("z: "+this.player.z, 2, 62, 16777215);
         }
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
