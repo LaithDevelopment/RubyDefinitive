@@ -16,6 +16,11 @@ public class Player extends Entity {
         this.zo = this.z;
         float xa = 0.0f;
         float ya = 0.0f;
+        
+        if(RubyDung.FLIGHT_ENABLED) {
+            this.yd = (float)0;
+        }
+        
         if (this.y < -1.0F) {
             this.resetPos();
         }
@@ -36,13 +41,24 @@ public class Player extends Entity {
         }
         if ((Keyboard.isKeyDown(57) || Keyboard.isKeyDown(219)) && this.onGround) {
             this.yd = 0.5f;
+            if (RubyDung.FLIGHT_ENABLED) {
+                this.yd += 0.5f;
+            }
         }
         this.moveRelative(xa, ya, this.onGround ? 0.1f : 0.02f);
-        this.yd -= (float)0.08;
+        if(!RubyDung.FLIGHT_ENABLED) {
+            this.yd -= (float)0.08;
+        }
         this.move(this.xd, this.yd, this.zd);
+        if (RubyDung.FLIGHT_ENABLED) {
+        	this.onGround = true;
+            this.xd *= 1.3f;
+            this.zd *= 1.3f;
+        } else {
         this.xd *= 0.91f;
         this.yd *= 0.98f;
         this.zd *= 0.91f;
+        }
         if (this.onGround) {
             this.xd *= 0.7f;
             this.zd *= 0.7f;
