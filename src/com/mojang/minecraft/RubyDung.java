@@ -35,7 +35,7 @@ import com.mojang.minecraft.level.Level;
 import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
-    public static final String VERSION_STRING = "rd-0.0.2";
+    public static final String VERSION_STRING = "rd-0.0.3";
     public static final String BUILD_STRING = "tb1";
     //game options
     public static Boolean OLDWORLD_ENABLED;
@@ -515,8 +515,6 @@ public class RubyDung implements Runnable {
         this.lb.flip();
         return this.lb;
     }
-    
-    
     
     public static void checkError() {
         final int e = GL11.glGetError();

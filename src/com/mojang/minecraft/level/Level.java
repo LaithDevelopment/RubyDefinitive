@@ -81,6 +81,13 @@ public class Level {
                         if (y < 32) {
                             id = Tile.rock.id;
                         }
+                        //for fluid testing
+                        if(x == 255 && y == 35 && z == 0 ) {
+                        	id = Tile.calmLava.id;
+                        }
+                        if(x == 0 && y == 35 && z == 255 ) {
+                        	id = Tile.calmWater.id;
+                        }
                         this.blocks[i] = (byte)id;
                     }else {
                     if (y == dh3) {
