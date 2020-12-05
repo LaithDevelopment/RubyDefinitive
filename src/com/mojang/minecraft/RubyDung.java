@@ -36,7 +36,7 @@ import java.nio.FloatBuffer;
 
 public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
-    public static final String BUILD_STRING = "db5 - Liquid_Test_Optimised";
+    public static final String BUILD_STRING = "tb1";
     //game options
     public static Boolean OLDWORLD_ENABLED;
     public static Boolean CAVES_ENABLED;
@@ -451,28 +451,30 @@ public class RubyDung implements Runnable {
         GL11.glScalef(-1.0f, -1.0f, 1.0f);
         final int id = Textures.loadTexture("/terrain.png", 9728);
         GL11.glBindTexture(3553, id);
-        if(OLDWORLD_ENABLED == true) {
-        }else {
+        
+        if(OLDWORLD_ENABLED == false) {
             GL11.glEnable(3553);
             t.init();
             Tile.tiles[this.paintTexture].render(t, this.level, 0, -2, 0, 0);
             t.flush();
             GL11.glDisable(3553);
         }
+        
         GL11.glPopMatrix();
         this.checkGlError("GUI: Draw selected");
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
+        
         if(FPS_ENABLED == true) {
             this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
-        }
-        if(OLDWORLD_ENABLED == false) {
             this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         }
+        
         if (COORDINATES_ENABLED == true) {
             this.font.drawShadow("x: "+this.player.x, 2, 42, 16777215);
             this.font.drawShadow("y: "+this.player.y, 2, 52, 16777215);
             this.font.drawShadow("z: "+this.player.z, 2, 62, 16777215);
         }
+        
         this.checkGlError("GUI: Draw text");
         final int wc = screenWidth / 2;
         final int hc = screenHeight / 2;
