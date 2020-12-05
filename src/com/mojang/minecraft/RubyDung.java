@@ -42,6 +42,7 @@ public class RubyDung implements Runnable {
     public static Boolean CAVES_ENABLED;
     public static Boolean FLAT_TERRAIN;
     private static Boolean COORDINATES_ENABLED;
+    private static Boolean FPS_ENABLED;
     private static Boolean FULLSCREEN_MODE;
     private int width;
     private int height;
@@ -461,11 +462,11 @@ public class RubyDung implements Runnable {
         GL11.glPopMatrix();
         this.checkGlError("GUI: Draw selected");
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
-        this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
-        if(OLDWORLD_ENABLED == true) {
-            this.font.drawShadow("rd-132211 recreation", 2, 22, 16777215);
-        }else {
-        this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
+        if(FPS_ENABLED == true) {
+            this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
+        }
+        if(OLDWORLD_ENABLED == false) {
+            this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
         }
         if (COORDINATES_ENABLED == true) {
             this.font.drawShadow("x: "+this.player.x, 2, 42, 16777215);
@@ -523,20 +524,18 @@ public class RubyDung implements Runnable {
     }
     
 	private static void buildOptions() throws IOException {
-        FileWriter myWriter = new FileWriter("options.txt");
-        myWriter.write("Fullscreen:false\nCoordinatesGui:false\nOldWorld:false\nFlatWorld:false\nGenerateCaves:true");
+        FileWriter myWriter = new FileWriter("options-rubydefinitive.txt");
+        myWriter.write("Fullscreen:false\nCoordinatesGui:false\nShowFPS:true\nOldWorld:false\nFlatWorld:false\nGenerateCaves:true");
         myWriter.close();
 	}
     
     public static void main(final String[] args) throws LWJGLException {
             	
         try {
-            File myObj = new File("options.txt");
+            File myObj = new File("options-rubydefinitive.txt");
             if (myObj.createNewFile()) {
-              System.out.println("File created: " + myObj.getName());
+              System.out.println("Created " + myObj.getName());
               buildOptions();
-            } else {
-              System.out.println("File already exists.");
             }
           } catch (IOException e) {
         	  System.out.println("An error occurred.");
@@ -546,7 +545,7 @@ public class RubyDung implements Runnable {
         String text = "";
         int lineNumber;
         try {
-          FileReader readfile = new FileReader("options.txt");
+          FileReader readfile = new FileReader("options-rubydefinitive.txt");
           BufferedReader readbuffer = new BufferedReader(readfile);
           for (lineNumber = 1; lineNumber < 10; lineNumber++) {
         	  
@@ -569,8 +568,18 @@ public class RubyDung implements Runnable {
         		  boolean coordinatesGuiOption = Boolean.parseBoolean(text);
         		  COORDINATES_ENABLED = coordinatesGuiOption;
         	  }
-            
+        	  
         	  else if (lineNumber == 3) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("ShowFPS:false") == false || text.contains("ShowFps:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("ShowFPS:", "");
+        		  boolean FPSGuiOption = Boolean.parseBoolean(text);
+        		  FPS_ENABLED = FPSGuiOption;
+        	  }
+            
+        	  else if (lineNumber == 4) {
         		  text = readbuffer.readLine();
         		  if(text.contains("OldWorld:false") == false || text.contains("OldWorld:true") == false) {
         			  buildOptions();
@@ -580,7 +589,7 @@ public class RubyDung implements Runnable {
         		  OLDWORLD_ENABLED = oldWorldOption;
         	  }
             
-        	  else if (lineNumber == 4) {
+        	  else if (lineNumber == 5) {
         		  text = readbuffer.readLine();
         		  if(text.contains("FlatWorld:false") == false || text.contains("FlatWorld:true") == false) {
         			  buildOptions();
@@ -590,7 +599,7 @@ public class RubyDung implements Runnable {
         		  FLAT_TERRAIN = flatWorldOption;
         	  }
             
-        	  else if (lineNumber == 5) {
+        	  else if (lineNumber == 6) {
         		  text = readbuffer.readLine();
         		  if(text.contains("GenerateCaves:false") == false || text.contains("GenerateCaves:true") == false) {
         			  buildOptions();
