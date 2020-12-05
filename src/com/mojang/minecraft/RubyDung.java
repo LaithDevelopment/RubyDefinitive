@@ -8,6 +8,11 @@ import org.lwjgl.util.glu.GLU;
 import com.mojang.minecraft.level.Chunk;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
@@ -23,6 +28,7 @@ import com.mojang.minecraft.character.Human;
 import com.mojang.minecraft.character.Notch;
 
 import java.util.ArrayList;
+
 import com.mojang.minecraft.particle.ParticleEngine;
 import com.mojang.minecraft.level.LevelRenderer;
 import com.mojang.minecraft.level.Level;
@@ -32,11 +38,11 @@ public class RubyDung implements Runnable {
     public static final String VERSION_STRING = "rd-0.0.2";
     public static final String BUILD_STRING = "db5 - Liquid_Test_Optimised";
     //game options
-    public static final Boolean OLDWORLD_ENABLED = false;
-    public static final Boolean CAVES_ENABLED = true;
-    public static final Boolean FLAT_TERRAIN = false;
-    private static final Boolean COORDINATES_ENABLED = false;
-    private static final Boolean FULLSCREEN_MODE = false;
+    public static Boolean OLDWORLD_ENABLED;
+    public static Boolean CAVES_ENABLED;
+    public static Boolean FLAT_TERRAIN;
+    private static Boolean COORDINATES_ENABLED;
+    private static Boolean FULLSCREEN_MODE;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -516,7 +522,88 @@ public class RubyDung implements Runnable {
         }
     }
     
+	private static void buildOptions() throws IOException {
+        FileWriter myWriter = new FileWriter("options.txt");
+        myWriter.write("Fullscreen:false\nCoordinatesGui:false\nOldWorld:false\nFlatWorld:false\nGenerateCaves:true");
+        myWriter.close();
+	}
+    
     public static void main(final String[] args) throws LWJGLException {
+            	
+        try {
+            File myObj = new File("options.txt");
+            if (myObj.createNewFile()) {
+              System.out.println("File created: " + myObj.getName());
+              buildOptions();
+            } else {
+              System.out.println("File already exists.");
+            }
+          } catch (IOException e) {
+        	  System.out.println("An error occurred.");
+        	  e.printStackTrace();
+          }
+        
+        String text = "";
+        int lineNumber;
+        try {
+          FileReader readfile = new FileReader("options.txt");
+          BufferedReader readbuffer = new BufferedReader(readfile);
+          for (lineNumber = 1; lineNumber < 10; lineNumber++) {
+        	  
+        	  if (lineNumber == 1) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("Fullscreen:false") == false || text.contains("Fullscreen:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("Fullscreen:", "");
+        		  boolean fullscreenOption = Boolean.parseBoolean(text);
+        		  FULLSCREEN_MODE = fullscreenOption;
+        	  }
+            
+        	  else if (lineNumber == 2) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("CoordinatesGui:false") == false || text.contains("CoordinatesGui:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("CoordinatesGui:", "");
+        		  boolean coordinatesGuiOption = Boolean.parseBoolean(text);
+        		  COORDINATES_ENABLED = coordinatesGuiOption;
+        	  }
+            
+        	  else if (lineNumber == 3) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("OldWorld:false") == false || text.contains("OldWorld:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("OldWorld:", "");
+        		  boolean oldWorldOption = Boolean.parseBoolean(text);
+        		  OLDWORLD_ENABLED = oldWorldOption;
+        	  }
+            
+        	  else if (lineNumber == 4) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("FlatWorld:false") == false || text.contains("FlatWorld:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("FlatWorld:", "");
+        		  boolean flatWorldOption = Boolean.parseBoolean(text);
+        		  FLAT_TERRAIN = flatWorldOption;
+        	  }
+            
+        	  else if (lineNumber == 5) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("GenerateCaves:false") == false || text.contains("GenerateCaves:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("GenerateCaves:", "");
+        		  boolean generateCavesOption = Boolean.parseBoolean(text);
+        		  CAVES_ENABLED = generateCavesOption;
+        	  }
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        //start game
         new Thread((Runnable)new RubyDung()).start();
-    }
+      }
 }
