@@ -482,8 +482,9 @@ public class RubyDung implements Runnable {
         }
         
         if (COORDINATES_ENABLED == true) {
+            float y = this.player.y + 0.38F;
             this.font.drawShadow("x: "+this.player.x, 2, 42, 16777215);
-            this.font.drawShadow("y: "+this.player.y, 2, 52, 16777215);
+            this.font.drawShadow("y: "+y, 2, 52, 16777215);
             this.font.drawShadow("z: "+this.player.z, 2, 62, 16777215);
         }
         
