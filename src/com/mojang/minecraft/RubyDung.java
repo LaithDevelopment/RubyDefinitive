@@ -44,6 +44,8 @@ public class RubyDung implements Runnable {
     private static Boolean COORDINATES_ENABLED;
     private static Boolean FPS_ENABLED;
     private static Boolean FULLSCREEN_MODE;
+    private static Boolean VSYNC_MODE;
+    public static Boolean FLIGHT_ENABLED = false;
     private int width;
     private int height;
     private FloatBuffer fogColor0;
@@ -94,6 +96,10 @@ public class RubyDung implements Runnable {
             Display.setFullscreen(true);
         }else {
             Display.setDisplayMode(new DisplayMode(853, 480));
+        }
+        if(VSYNC_MODE == true) {
+            Display.setVSyncEnabled(true);
+            Display.sync(60);
         }
         Display.setTitle("RubyDefinitive");
         Display.create();
@@ -216,6 +222,9 @@ public class RubyDung implements Runnable {
                 }
                 if (Keyboard.getEventKey() == 35) {
                     this.zombies.add(new Zombie(this.level, this.player.x, this.player.y, this.player.z));
+                }
+                if (Keyboard.getEventKey() == 33) {
+                	RubyDung.FLIGHT_ENABLED ^= true;
                 }
             }
         }
@@ -464,6 +473,10 @@ public class RubyDung implements Runnable {
         this.checkGlError("GUI: Draw selected");
         this.font.drawShadow(VERSION_STRING+" "+BUILD_STRING, 2, 2, 16777215);
         
+        if(FLIGHT_ENABLED == true) {
+            this.font.drawShadow("Flight ON", 2, 32, 16777215);
+        }
+        
         if(FPS_ENABLED == true) {
             this.font.drawShadow("Fps: "+this.fpsString, 2, 12, 16777215);
             this.font.drawShadow("Selected Block Id: "+this.paintTexture, 2, 22, 16777215);
@@ -525,7 +538,7 @@ public class RubyDung implements Runnable {
     
 	private static void buildOptions() throws IOException {
         FileWriter myWriter = new FileWriter("options-rubydefinitive.txt");
-        myWriter.write("Fullscreen:false\nCoordinatesGui:false\nShowFPS:true\nOldWorld:false\nFlatWorld:false\nGenerateCaves:true");
+        myWriter.write("Fullscreen:false\nCoordinatesGui:false\nShowFPS:true\nOldWorld:false\nFlatWorld:false\nGenerateCaves:true\nVsync:false");
         myWriter.close();
 	}
     
@@ -571,7 +584,7 @@ public class RubyDung implements Runnable {
         	  
         	  else if (lineNumber == 3) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("ShowFPS:false") == false || text.contains("ShowFps:true") == false) {
+        		  if(text.contains("ShowFPS:false") == false || text.contains("ShowFPS:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("ShowFPS:", "");
@@ -607,6 +620,15 @@ public class RubyDung implements Runnable {
         		  text = text.replace("GenerateCaves:", "");
         		  boolean generateCavesOption = Boolean.parseBoolean(text);
         		  CAVES_ENABLED = generateCavesOption;
+        	  }
+        	  else if (lineNumber == 7) {
+        		  text = readbuffer.readLine();
+        		  if(text.contains("Vsync:false") == false || text.contains("Vsync:true") == false) {
+        			  buildOptions();
+        		  }
+        		  text = text.replace("Vsync:", "");
+        		  boolean vsyncOption = Boolean.parseBoolean(text);
+        		  VSYNC_MODE = vsyncOption;
         	  }
           }
         } catch (IOException e) {
