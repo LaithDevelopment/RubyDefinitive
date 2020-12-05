@@ -564,7 +564,7 @@ public class RubyDung implements Runnable {
         	  
         	  if (lineNumber == 1) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("Fullscreen:false") == false || text.contains("Fullscreen:true") == false) {
+        		  if(text.contains("Fullscreen:false") == false && text.contains("Fullscreen:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("Fullscreen:", "");
@@ -574,7 +574,7 @@ public class RubyDung implements Runnable {
             
         	  else if (lineNumber == 2) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("CoordinatesGui:false") == false || text.contains("CoordinatesGui:true") == false) {
+        		  if(text.contains("CoordinatesGui:false") == false && text.contains("CoordinatesGui:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("CoordinatesGui:", "");
@@ -584,7 +584,7 @@ public class RubyDung implements Runnable {
         	  
         	  else if (lineNumber == 3) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("ShowFPS:false") == false || text.contains("ShowFPS:true") == false) {
+        		  if(text.contains("ShowFPS:false") == false && text.contains("ShowFPS:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("ShowFPS:", "");
@@ -594,7 +594,7 @@ public class RubyDung implements Runnable {
             
         	  else if (lineNumber == 4) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("OldWorld:false") == false || text.contains("OldWorld:true") == false) {
+        		  if(text.contains("OldWorld:false") == false && text.contains("OldWorld:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("OldWorld:", "");
@@ -604,7 +604,7 @@ public class RubyDung implements Runnable {
             
         	  else if (lineNumber == 5) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("FlatWorld:false") == false || text.contains("FlatWorld:true") == false) {
+        		  if(text.contains("FlatWorld:false") == false && text.contains("FlatWorld:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("FlatWorld:", "");
@@ -614,7 +614,7 @@ public class RubyDung implements Runnable {
             
         	  else if (lineNumber == 6) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("GenerateCaves:false") == false || text.contains("GenerateCaves:true") == false) {
+        		  if(text.contains("GenerateCaves:false") == false && text.contains("GenerateCaves:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("GenerateCaves:", "");
@@ -623,7 +623,7 @@ public class RubyDung implements Runnable {
         	  }
         	  else if (lineNumber == 7) {
         		  text = readbuffer.readLine();
-        		  if(text.contains("Vsync:false") == false || text.contains("Vsync:true") == false) {
+        		  if(text.contains("Vsync:false") == false && text.contains("Vsync:true") == false) {
         			  buildOptions();
         		  }
         		  text = text.replace("Vsync:", "");
