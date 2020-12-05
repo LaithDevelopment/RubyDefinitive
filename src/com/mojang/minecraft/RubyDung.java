@@ -99,7 +99,6 @@ public class RubyDung implements Runnable {
         }
         if(VSYNC_MODE == true) {
             Display.setVSyncEnabled(true);
-            Display.sync(60);
         }
         Display.setTitle("RubyDefinitive");
         Display.create();
